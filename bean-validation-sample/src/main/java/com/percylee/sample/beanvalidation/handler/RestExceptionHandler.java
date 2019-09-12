@@ -4,11 +4,14 @@ package com.percylee.sample.beanvalidation.handler;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
@@ -24,11 +27,35 @@ import java.util.stream.Collectors;
 @RestControllerAdvice(annotations = RestController.class)
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
+
+    /**
+     *
+     * @param e
+     * @return
+     */
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<RestExceptionResult> handleConstraintViolationException(ConstraintViolationException e) {
+    public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException e) {
         String msg = e.getConstraintViolations().stream().map(x -> x.getMessage()).collect(Collectors.joining(","));
         log.info("[ConstraintViolationException] {}", msg);
-        RestExceptionResult result = new RestExceptionResult(HttpStatus.BAD_REQUEST.value(), Type.INFO, msg);
+        RestExceptionResult result = new RestExceptionResult(HttpStatus.BAD_REQUEST.value(), Type.WARN, msg);
+        return ResponseEntity.status(result.getCode()).body(result);
+    }
+
+    /**
+     * <code>@Valid</code>在嵌套校验时抛出的异常是MethodArgumentNotValidException，但是
+     * 这个异常在ResponseEntityExceptionHandler中有定义，所以不能按照上述方式声明
+     * @param ex
+     * @param headers
+     * @param status
+     * @param request
+     * @return
+     */
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String msg = ex.getBindingResult().getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining(","));
+        log.info("[ArgumentNotValidException] {}", msg);
+        RestExceptionResult result = new RestExceptionResult(HttpStatus.BAD_REQUEST.value(), Type.WARN, msg);
         return ResponseEntity.status(result.getCode()).body(result);
     }
 

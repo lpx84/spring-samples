@@ -24,6 +24,8 @@ public class BeanValidationSampleApplicationTests {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
+    @Test
+    public void testBean() {
 
-
+    }
 }
