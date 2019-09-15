@@ -1,9 +1,7 @@
 package com.percylee.sample.beanvalidation.model;
 
 import com.percylee.sample.beanvalidation.validation.group.CreateIndent;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -16,9 +14,11 @@ import java.util.List;
  * @author 李鹏翔(lipengxiang1)
  * @date 2019-08-22
  **/
+@Builder
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Indent {
 
     @Null(message = "{indent.id.must.null}", groups = CreateIndent.class)
@@ -46,6 +46,7 @@ public class Indent {
     /**
      * 创建时间
      */
+    @Deprecated
     private LocalDateTime createTime;
 
     /**
