@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 /**
  * 用户信息
+ *
  * @author 李鹏翔(lipengxiang1)
  * @date 2019-09-06
  **/

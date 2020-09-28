@@ -28,6 +28,7 @@ public class Goods {
 
     /**
      * 商品编号，8位整数
+     *
      * @deprecated 不用传这个值了以后
      */
     @Min(value = 10000000, groups = AddGoods.class)
@@ -35,6 +36,7 @@ public class Goods {
 
     /**
      * 国际商品码
+     *
      * @required
      * @default 1234567890123
      * @rule [0-9]{13}

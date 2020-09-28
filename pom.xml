@@ -11,6 +11,7 @@
         <module>spring-cache-extend</module>
         <module>redis-cache-sample</module>
         <module>bean-validation-sample</module>
+        <module>spring-batch-sample</module>
     </modules>
 
     <dependencyManagement>

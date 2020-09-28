@@ -1,6 +1,7 @@
 package com.percylee.sample.beanvalidation.controller;
 
 import com.percylee.sample.beanvalidation.model.Goods;
+import com.percylee.sample.beanvalidation.model.RestResult;
 import com.percylee.sample.beanvalidation.validation.group.AddGoods;
 import org.hibernate.validator.constraints.ParameterScriptAssert;
 import org.springframework.validation.annotation.Validated;
@@ -12,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Min;
 import java.util.List;
 
 /**
  * 商品接口服务
+ *
  * @author 李鹏翔(lipengxiang1)
  * @date 2019-08-26
  **/
@@ -28,6 +31,7 @@ public class GoodsController {
 
     /**
      * 增加商品<code>Goods</code>
+     *
      * @param goods 需要保存的商品
      * @return 保存后的商品信息
      */
@@ -41,6 +45,7 @@ public class GoodsController {
      * 下面的@Min生效的条件：
      * 1. 保证MethodValidationPostProcessor已经注入，Spring Boot会自动注入
      * 2. 在class上面有@Validated
+     *
      * @param id 商品ID
      * @return
      */
@@ -52,6 +57,7 @@ public class GoodsController {
     /**
      * 通过eanCode查询商品
      * 另一种检验方式，如果格式不正确，则会返回404
+     *
      * @param eanCode
      * @return
      */
@@ -62,6 +68,7 @@ public class GoodsController {
 
     /**
      * 还支持脚本验证
+     *
      * @return
      */
     @RequestMapping(value = "/eanCode2/{eanCode}")
@@ -74,6 +81,7 @@ public class GoodsController {
 
     /**
      * 搜索一个商品ID
+     *
      * @param key 关键字
      *            支持模糊搜索
      * @return
@@ -87,6 +95,7 @@ public class GoodsController {
 
     /**
      * 搜索商品
+     *
      * @param keys
      * @return 符合条件的商品信息列表
      */
@@ -95,4 +104,15 @@ public class GoodsController {
         return null;
     }
 
+    /**
+     * 上传图片
+     *
+     * @param pic     图片文件
+     * @param goodsId 商品ID
+     * @return
+     */
+    @PostMapping("/upload/picture")
+    public RestResult<String> uploadPicture(@RequestParam("file") MultipartFile pic, Long goodsId) {
+        return null;
+    }
 }

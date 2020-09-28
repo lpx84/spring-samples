@@ -26,6 +26,7 @@ public class CustomerMvcConfig implements WebMvcConfigurer {
     /**
      * spring默认的LocaleResolver是: AcceptHeaderLocaleResolver
      * 获取当前Locale可以使用：LocaleContextHolder.getLocale();
+     *
      * @return
      */
     @Bean

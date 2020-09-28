@@ -1,6 +1,7 @@
 package com.percylee.sample.beanvalidation.controller;
 
-import com.alibaba.fastjson.JSON;
+//import com.alibaba.fastjson.JSON;
+
 import com.percylee.sample.beanvalidation.model.Indent;
 import com.percylee.sample.beanvalidation.model.RestResult;
 import com.percylee.sample.beanvalidation.validation.group.CreateIndent;
@@ -23,12 +24,13 @@ public class IndentController {
 
     /**
      * 提交订单
+     *
      * @param indent
      * @return
      */
     @PostMapping("/submit")
     public Indent submit(@Validated(value = CreateIndent.class) @RequestBody Indent indent) {
-        log.info(JSON.toJSONString(LocaleContextHolder.getLocale()));
+        //log.info(JSON.toJSONString(LocaleContextHolder.getLocale()));
         return indent;
     }
 
@@ -39,6 +41,7 @@ public class IndentController {
 
     /**
      * 取消订单
+     *
      * @param id
      * @return
      */

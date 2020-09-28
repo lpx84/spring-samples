@@ -29,7 +29,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     /**
-     *
      * @param e
      * @return
      */
@@ -44,6 +43,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     /**
      * <code>@Valid</code>在嵌套校验时抛出的异常是MethodArgumentNotValidException，但是
      * 这个异常在ResponseEntityExceptionHandler中有定义，所以不能按照上述方式声明
+     *
      * @param ex
      * @param headers
      * @param status
